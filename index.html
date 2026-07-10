@@ -452,14 +452,37 @@ h2.section-title{
 .dev-card:hover .dev-tagline{color:#4A4540;}
 
 /* ---------- footer ---------- */
-footer{padding:40px 0;border-top:3px solid var(--ink);}
+footer{
+  padding:40px 0;
+  border-top:3px solid var(--ink);
+  background:#000;
+  color:var(--ink);
+}
 .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
 .foot-brand{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;}
 .foot-brand img{width:20px;height:20px;}
 .foot-links{display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);}
 .foot-links a:hover{color:var(--ink);}
 
+/* ---------- hamburger ---------- */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  background:none;border:none;padding:8px;z-index:60;
+}
+.hamburger span{
+  display:block;width:26px;height:3px;background:var(--ink);
+  transition:transform .2s ease,opacity .2s ease;
+}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+.mobile-nav{display:none;}
+
 /* ---------- responsive ---------- */
+@media (max-width:980px){
+  section{padding:60px 0;}
+  .section-head{margin-bottom:36px;}
+}
 @media (max-width:880px){
   .hero-inner{grid-template-columns:1fr;}
   .feat-grid{grid-template-columns:1fr;}
@@ -470,11 +493,56 @@ footer{padding:40px 0;border-top:3px solid var(--ink);}
   .dl-grid{grid-template-columns:1fr;}
   .dev-grid{grid-template-columns:1fr 1fr;}
   .navlinks{display:none;}
+  .hamburger{display:flex;}
+  .mobile-nav{
+    display:flex;flex-direction:column;position:fixed;inset:0;
+    background:rgba(0,0,0,0.97);z-index:55;
+    justify-content:center;align-items:center;gap:24px;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .mobile-nav.open{opacity:1;pointer-events:all;}
+  .mobile-nav a{
+    font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;
+    letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);
+  }
+  .topnav-inner .nav-cta{display:none;}
+  .mobile-nav .nav-cta{
+    display:inline-block;margin-top:10px;
+    background:var(--ink);color:var(--paper);
+    padding:12px 30px;font-family:'JetBrains Mono',monospace;font-weight:700;
+    font-size:15px;letter-spacing:0.04em;text-transform:uppercase;
+    border:3px solid var(--ink);
+  }
 }
-@media (max-width:520px){
+@media (max-width:600px){
+  .dev-grid{grid-template-columns:1fr 1fr;gap:8px;}
+  .dev-card{padding:24px 18px;}
+  .hero{min-height:70vh;}
+  h1.headline{font-size:clamp(30px, 10vw, 48px);}
+  .sub{font-size:15px;max-width:100%;margin-bottom:28px;}
+  .btn-primary,.btn-secondary,.btn-tertiary{min-width:auto;width:100%;justify-content:center;text-align:center;padding:14px 20px;font-size:13px;}
+  .hero-ctas{gap:10px;}
+  .hero-meta{gap:12px;font-size:11px;}
+  .hero-brought{gap:20px;font-size:10px;}
+  .feat-card{padding:24px 20px;}
+  .feat-title{font-size:16px;}
+  .feat-desc{font-size:13.5px;}
+  .loader-cell{padding:24px 20px;gap:14px;flex-direction:column;text-align:center;}
+  .dl-card{flex-direction:column;align-items:flex-start;padding:20px;}
+  .dl-btn{width:100%;text-align:center;}
+  .foot-inner{flex-direction:column;text-align:center;gap:18px;}
+  .foot-links{flex-wrap:wrap;justify-content:center;}
+  footer{padding:30px 0;}
+  .changelog-box{padding:20px;}
+  .carousel-arrow{width:36px;height:36px;font-size:14px;}
+  .carousel-arrow.prev{left:6px;}
+  .carousel-arrow.next{right:6px;}
+  .support-fab{right:10px;bottom:10px;padding:8px 12px;font-size:11px;}
+}
+@media (max-width:400px){
   .dev-grid{grid-template-columns:1fr;}
-  .hero-ctas{flex-direction:column;}
-  .btn-primary,.btn-secondary{width:100%;justify-content:center;text-align:center;}
+  .hero-meta{flex-direction:column;align-items:center;gap:6px;}
+  .countdown-units{flex-wrap:wrap;justify-content:center;}
 }
 </style>
 </head>
@@ -498,6 +566,17 @@ footer{padding:40px 0;border-top:3px solid var(--ink);}
       <a href="#devs">Devs</a>
     </div>
     <a href="#download" class="nav-cta">Get Soul</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#features">Features</a>
+      <a href="#loaders">Loaders</a>
+      <a href="#download">Download</a>
+      <a href="#preview">Preview</a>
+      <a href="#devs">Devs</a>
+      <a href="#download" class="nav-cta">Get Soul</a>
+    </div>
   </div>
 </nav>
 
@@ -522,8 +601,7 @@ footer{padding:40px 0;border-top:3px solid var(--ink);}
     <p class="sub">Soul Client handles Vanilla, Fabric, and Forge from one place — version picking, mod browsing, skins, Java, and instance management — without the silent failures.</p>
     <div class="hero-ctas">
       <a href="#download" class="btn-primary">&#8595; Download for Windows</a>
-      <a href="#loaders" class="btn-secondary">&#9670; Standalone Fabric Mod Jar</a>
-      <a href="#devs" class="btn-tertiary">Join Discord</a>
+      <a href="https://discord.gg/7Tsk8v36aq" class="btn-tertiary">Join Discord</a>
     </div>
     <p class="hero-formerly">Formerly Zudo Client</p>
     <div class="hero-meta">
@@ -733,6 +811,20 @@ footer{padding:40px 0;border-top:3px solid var(--ink);}
 </footer>
 
 <script>
+  // Hamburger mobile nav toggle
+  document.getElementById('hamburger').onclick = () => {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobile-nav').classList.toggle('open');
+    document.body.style.overflow = document.body.style.overflow === 'hidden' ? '' : 'hidden';
+  };
+  document.querySelectorAll('.mobile-nav a').forEach(a => {
+    a.onclick = () => {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('mobile-nav').classList.remove('open');
+      document.body.style.overflow = '';
+    };
+  });
+
   const firebaseConfig = {
     apiKey: "AIzaSyDVq742GFVGqy65RQfhBJZd5GKq4RwBdjc",
     authDomain: "soullauncher-99808.firebaseapp.com",
