@@ -1036,7 +1036,7 @@ footer{
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">Next-gen Minecraft engine by our partners</div>
         </div>
       </div>
-      <div class="dl-cards" id="kruth-dl-cards">
+        <div class="dl-cards" id="kruth-dl-cards">
         <div class="dl-card">
           <div class="dl-os">
             <div class="dl-os-icon"><i class="fa-brands fa-windows"></i></div>
@@ -1047,6 +1047,10 @@ footer{
           </div>
           <span class="dl-btn">Please wait</span>
         </div>
+      </div>
+      <div class="changelog-box" id="kruth-changelog-box">
+        <h3>What changed</h3>
+        <p style="color:#9A968D;font-size:14px;">Loading release notes…</p>
       </div>
     </div>
 
@@ -1298,15 +1302,17 @@ footer{
   });
 
   // ---- Kruth Client downloads ----
-  const kruthPlatforms = [
-    { id: 'windows', label: 'Windows', sub: '.exe installer', icon: 'fa-brands fa-windows', urlKey: 'windowsUrl' },
-    { id: 'linux', label: 'Linux', sub: '.AppImage', icon: 'fa-brands fa-linux', urlKey: 'linuxUrl' },
-    { id: 'forge', label: 'Forge Jar', sub: 'Forge 1.8.9', icon: 'fa-solid fa-cube', urlKey: 'forgeUrl' }
-  ];
+  const kruthPlatformMeta = {
+    windows: { label: 'Windows', sub: '.exe installer · x64', icon: 'fa-brands fa-windows' },
+    linux:   { label: 'Linux',   sub: '.AppImage',            icon: 'fa-brands fa-linux'   },
+    forge:   { label: 'Forge Jar', sub: 'Forge 1.8.9',        icon: 'fa-solid fa-cube'     }
+  };
 
-  function renderKruthDownloads(data) {
+  function renderKruthDownloads(releases) {
     const cards = document.getElementById('kruth-dl-cards');
-    if (!data || (!data.windowsUrl && !data.linuxUrl && !data.forgeUrl)) {
+    const changelogBox = document.getElementById('kruth-changelog-box');
+
+    if (!releases.length) {
       cards.innerHTML = `
         <div class="dl-card disabled">
           <div class="dl-os">
@@ -1318,29 +1324,64 @@ footer{
           </div>
           <span class="dl-btn">Unavailable</span>
         </div>`;
+      if (changelogBox) changelogBox.innerHTML = `<h3>What changed</h3><p style="color:#9A968D;font-size:14px;">No release notes yet.</p>`;
       return;
     }
 
-    cards.innerHTML = kruthPlatforms.map(p => {
-      const url = data[p.urlKey];
+    const byPlatform = {};
+    releases.forEach(r => {
+      const key = r.platform || 'windows';
+      if (!byPlatform[key] || (r.createdAt || 0) > (byPlatform[key].createdAt || 0)) {
+        byPlatform[key] = r;
+      }
+    });
+
+    const order = ['windows', 'linux', 'forge'];
+    cards.innerHTML = order.map(key => {
+      const meta = kruthPlatformMeta[key];
+      const r = byPlatform[key];
+      if (!r) {
+        return `
+          <div class="dl-card disabled">
+            <div class="dl-os">
+              <div class="dl-os-icon"><i class="${meta.icon}"></i></div>
+              <div>
+                <div class="dl-os-name">${meta.label}</div>
+                <div class="dl-os-sub">Not built yet</div>
+              </div>
+            </div>
+            <span class="dl-btn">Unavailable</span>
+          </div>`;
+      }
       return `
-        <div class="dl-card ${url ? '' : 'disabled'}">
+        <div class="dl-card">
           <div class="dl-os">
-            <div class="dl-os-icon"><i class="${p.icon}"></i></div>
+            <div class="dl-os-icon"><i class="${meta.icon}"></i></div>
             <div>
-              <div class="dl-os-name">${p.label}</div>
-              <div class="dl-os-sub">${p.sub}${data.version ? ' &middot; v' + data.version : ''}</div>
+              <div class="dl-os-name">${meta.label}</div>
+              <div class="dl-os-sub">${meta.sub}</div>
             </div>
           </div>
-          ${url
-            ? `<a href="${url}" class="dl-btn" target="_blank" rel="noopener">Download v${data.version || ''}</a>`
-            : `<span class="dl-btn">Unavailable</span>`}
+          <a href="${r.url}" class="dl-btn" target="_blank" rel="noopener">Download v${r.version}</a>
         </div>`;
     }).join('');
+
+    if (changelogBox) {
+      const current = releases.find(r => r.isCurrent) || releases.sort((a,b) => (b.createdAt||0)-(a.createdAt||0))[0];
+      const dateStr = current.createdAt ? new Date(current.createdAt).toLocaleDateString(undefined, { year:'numeric', month:'long', day:'numeric' }) : '';
+      changelogBox.innerHTML = `
+        ${dateStr ? `<span class="v-date mono">${dateStr.toUpperCase()}</span>` : ''}
+        <span class="v-tag">v${current.version}</span>
+        <h3>What changed</h3>
+        ${current.notes ? renderNotes(current.notes) : '<p style="color:#9A968D;font-size:14px;">No release notes for this version.</p>'}
+      `;
+    }
   }
 
   db.ref('kruth_releases').on('value', snapshot => {
-    renderKruthDownloads(snapshot.val());
+    const data = snapshot.val() || {};
+    const releases = Object.values(data);
+    renderKruthDownloads(releases);
   });
 
   // ---- Launcher preview carousel ----
@@ -1765,4 +1806,10 @@ footer{
 
     if (reduceMotion) {
       drawStatic();
-    } e
+    } else {
+      requestAnimationFrame(step);
+    }
+  })();
+</script>
+</body>
+</html>
