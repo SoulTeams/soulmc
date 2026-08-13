@@ -878,6 +878,11 @@ footer{
   width:100%;aspect-ratio:2/1;object-fit:contain;background:var(--paper-dim);
   border:2px solid var(--ink);image-rendering:pixelated;
 }
+.cosmetics-card .cos-preview-none{
+  width:100%;aspect-ratio:2/1;background:var(--paper-dim);border:2px dashed var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--muted);
+}
 .cosmetics-card .cos-name{font-family:'Inter',sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.01em;}
 .cosmetics-card .cos-id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
 .cosmetics-card .cos-badge{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--alert);}
@@ -1047,6 +1052,96 @@ footer{
 .coin-code-input{width:100%;background:var(--paper);border:2px solid var(--ink);padding:11px 12px;
   color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;margin-bottom:14px;}
 .coin-code-input:focus{border-color:var(--bolt);}
+
+/* ---------- jobs page ---------- */
+.job-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;
+}
+.job-card{
+  background:var(--paper);border:3px solid var(--ink);padding:28px 24px;
+  display:flex;flex-direction:column;gap:12px;cursor:pointer;text-align:left;
+  transition:background .15s ease,transform .12s ease;
+}
+.job-card:hover{background:var(--bolt);transform:translateY(-3px);}
+.job-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border:2px solid var(--ink);background:var(--paper);
+  font-size:18px;color:var(--ink);margin-bottom:4px;
+}
+.job-card:hover .job-icon{background:var(--ink);color:var(--bolt);}
+.job-role{font-family:'Inter',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.01em;}
+.job-desc{font-size:13.5px;line-height:1.55;color:var(--ink-soft);margin:0;flex:1;}
+.job-card:hover .job-desc{color:var(--ink);}
+.job-apply-btn{
+  background:var(--ink);color:var(--paper);border:2px solid var(--ink);
+  padding:11px 18px;font-family:'JetBrains Mono',monospace;font-weight:700;
+  font-size:12px;letter-spacing:0.04em;text-transform:uppercase;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+}
+.job-card:hover .job-apply-btn{background:var(--paper);color:var(--bolt);border-color:var(--paper);}
+.job-form-box{
+  background:var(--paper-dim);border:3px solid var(--ink);
+  padding:26px 28px;box-shadow:6px 6px 0 var(--bolt-deep);
+}
+.job-form-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+.job-form-head .job-form-icon{
+  width:44px;height:44px;border:2px solid var(--ink);background:var(--bolt);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;
+}
+.job-form-head h3{margin:0;font-family:'Inter',sans-serif;font-weight:900;font-size:20px;letter-spacing:-.01em;}
+.job-form-head .cos-tickets-sub{margin-top:3px;}
+.job-form-field{margin-bottom:16px;}
+.job-form-label{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;
+}
+.job-form-label .req{color:var(--alert);}
+.job-form-input{
+  width:100%;background:var(--paper);border:2px solid var(--ink);
+  padding:11px 14px;color:var(--ink);font-family:'JetBrains Mono',monospace;
+  font-size:13px;outline:none;transition:border-color .12s ease;
+}
+.job-form-input:focus{border-color:var(--bolt);}
+.job-form-textarea{
+  width:100%;background:var(--paper);border:2px solid var(--ink);
+  padding:11px 14px;color:var(--ink);font-family:'JetBrains Mono',monospace;
+  font-size:13px;outline:none;min-height:96px;resize:vertical;
+  transition:border-color .12s ease;
+}
+.job-form-textarea:focus{border-color:var(--bolt);}
+.job-form-actions{display:flex;gap:10px;margin-top:22px;}
+.job-form-actions button{flex:1;padding:13px;border:2px solid var(--ink);
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;text-transform:uppercase;cursor:pointer;}
+.job-status{margin-top:16px;font-size:13px;line-height:1.6;min-height:16px;color:var(--muted);}
+.job-my-app{position:relative;overflow:hidden;background:var(--paper-dim);border:2px solid var(--ink);border-radius:16px;
+  padding:20px 22px;margin-bottom:14px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  transition:border-color .2s, transform .2s, box-shadow .2s;}
+.job-my-app::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bolt);}
+.job-my-app.pending::before{background:#fbbf24;}
+.job-my-app.accepted::before{background:#22c55e;}
+.job-my-app.rejected::before{background:#ef4444;}
+.job-my-app:hover{border-color:var(--bolt);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.18);}
+.job-my-app .job-my-role{display:flex;align-items:center;gap:14px;flex:1;min-width:220px;}
+.job-my-app .job-my-role i{width:46px;height:46px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(48,176,255,.22),rgba(48,176,255,.05));
+  border:2px solid rgba(48,176,255,.45);border-radius:12px;color:var(--bolt);font-size:17px;}
+.job-my-app .job-my-role b{font-size:15px;display:block;letter-spacing:-.01em;}
+.job-my-app .job-my-meta{display:block;font-size:12px;opacity:.7;margin-top:3px;}
+.job-my-app .job-my-sub{display:block;font-size:11px;opacity:.45;margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.job-my-app .job-my-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.job-my-status{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;
+  letter-spacing:.08em;padding:7px 14px;border:1px solid;border-radius:999px;text-transform:uppercase;}
+.job-my-status .job-my-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.job-my-chat{padding:10px 18px;border-radius:10px;border:2px solid var(--bolt);background:var(--bolt);color:#fff;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+  transition:background .15s, border-color .15s, transform .15s;}
+.job-my-chat:hover{background:var(--bolt-deep);border-color:var(--bolt-deep);transform:translateY(-1px);}
+.job-my-chat.locked{background:transparent;color:#f59e0b;border-color:#f59e0b;}
+.job-my-chat.locked:hover{background:rgba(245,158,11,.12);border-color:#f59e0b;}
+@media (max-width:600px){
+  .job-form-box{padding:20px 18px;}
+  .job-form-actions{flex-direction:column;}
+}
 </style>
 </head>
 <body>
@@ -1072,6 +1167,7 @@ footer{
       <a href="#" onclick="showCosmeticsPage();return false;">Cosmetics</a>
       <a href="#" onclick="showRedeemPage();return false;">Redeem</a>
       <a href="#" onclick="showPostsPage();return false;">Posts</a>
+      <a href="#" onclick="showJobsPage();return false;">Jobs</a>
       <a href="#devs" onclick="showMainContent()">Devs</a>
     </div>
     <a href="#" onclick="showMainContent()" class="nav-cta">Get Soul</a>
@@ -1087,6 +1183,7 @@ footer{
       <a href="#" onclick="showCosmeticsPage();return false;">Cosmetics</a>
       <a href="#" onclick="showRedeemPage();return false;">Redeem</a>
       <a href="#" onclick="showPostsPage();return false;">Posts</a>
+      <a href="#" onclick="showJobsPage();return false;">Jobs</a>
       <a href="#devs" onclick="showMainContent()">Devs</a>
       <a href="#download" onclick="showMainContent()" class="nav-cta">Get Soul</a>
     </div>
@@ -1146,6 +1243,9 @@ footer{
     <div id="chat-header">
       <div><h3 id="chat-title">Support Chat</h3><span id="chat-subtitle" style="font-size:11px;opacity:.5;"></span></div>
       <button id="chat-close">&times;</button>
+    </div>
+    <div id="chat-lock-bar" style="display:none;align-items:center;gap:8px;background:rgba(245,158,11,.12);border-bottom:1px solid rgba(245,158,11,.4);color:#f59e0b;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:8px 16px;">
+      <i class="fa-solid fa-lock"></i> This ticket is paused by a staff member &mdash; messages are disabled
     </div>
     <div id="chat-msgs"></div>
     <div id="chat-input-area">
@@ -1599,6 +1699,43 @@ footer{
   </div>
 </section>
 
+<section id="jobs-page" class="page-posts">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Careers</span>
+      <h2 class="section-title">Join the Soul Client Team</h2>
+      <p class="section-desc">We're always looking for passionate people. Pick a role below and apply — the team will review your application and get back to you through chat.</p>
+    </div>
+    <div id="jobs-grid" class="job-grid"></div>
+    <div id="job-my-apps" style="display:none;margin-top:52px;max-width:640px;">
+      <div class="section-head" style="margin-bottom:22px;">
+        <span class="section-tag">My Applications</span>
+        <h2 class="section-title">Application Status</h2>
+        <p class="section-desc">Track the status of your applications — PENDING, ACCEPTED or REJECTED. Updates live.</p>
+      </div>
+      <div id="job-my-apps-list"></div>
+    </div>
+    <div id="job-form-wrap" style="display:none;max-width:640px;margin:40px auto 0;">
+      <button class="back-btn" onclick="jobBackToList()">&larr; All Jobs</button>
+      <div class="job-form-box">
+        <div class="job-form-head">
+          <div class="job-form-icon" id="job-form-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <div>
+            <h3 id="job-form-title">Apply</h3>
+            <div class="cos-tickets-sub">Answer every question honestly — quality over quantity.</div>
+          </div>
+        </div>
+        <div style="margin-top:22px;" id="job-questions"></div>
+        <div class="job-form-actions">
+          <button class="btn-ghost" onclick="jobBackToList()">Cancel</button>
+          <button class="btn-ok" onclick="submitJobApplication()"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
+        </div>
+        <div class="job-status" id="job-status"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 <footer>
@@ -1615,6 +1752,7 @@ footer{
       <a href="#" onclick="showCosmeticsPage();return false;">Cosmetics</a>
       <a href="#" onclick="showRedeemPage();return false;">Redeem</a>
       <a href="#" onclick="showPostsPage();return false;">Posts</a>
+      <a href="#" onclick="showJobsPage();return false;">Jobs</a>
       <a href="#devs" onclick="showMainContent()">Devs</a>
     </div>
     <div class="foot-links">
@@ -1640,8 +1778,10 @@ footer{
         showCosmeticsPage();
       } else if (attr.includes('showRedeemPage')) {
         showRedeemPage();
-      } else if (attr.includes('showPostsPage')) {
+      } else       if (attr.includes('showPostsPage')) {
         showPostsPage();
+      } else if (attr.includes('showJobsPage')) {
+        showJobsPage();
       } else {
         showMainContent();
       }
@@ -2164,56 +2304,74 @@ footer{
     return offlineUuid(username);
   }
 
+  let cosmeticsCatalogRef = null;
+  let cosmeticsCatalogCb = null;
+  let cosmeticsCatalogData = null;
+
+  async function renderCosmeticsGrid() {
+    const grid = document.getElementById('cosmetics-store-grid');
+    if (!grid) return;
+    const data = cosmeticsCatalogData || {};
+    const entries = Object.entries(data);
+    if (!entries.length) {
+      grid.innerHTML = '<div class="ms-empty">No cosmetics available yet.</div>';
+      return;
+    }
+    const user = getCoinsUser();
+    const ownedIds = new Set();
+    if (user) {
+      const playerId = await resolvePlayerId(user.name, user.type);
+      if (playerId) {
+        try {
+          const invSnap = await db.ref(`capes/inventory/${playerId}`).once('value');
+          const inv = invSnap.val() || {};
+          (inv.ownedItemIds || []).forEach(id => ownedIds.add(id));
+        } catch (e) {}
+      }
+    }
+    grid.innerHTML = entries.map(([id, item]) => {
+      const imgSrc = item.icon || item.preview || `Capes/${id}.png`;
+      const isAnim = item.animated;
+      const isFree = item.free === true;
+      const price = Number(item.price) > 0 ? Number(item.price) : 0;
+      const isOwned = ownedIds.has(id);
+      const safeName = (item.name || id).replace(/'/g, "\\'");
+      let btnHtml;
+      if (isFree) btnHtml = '<button class="cos-buy-btn owned">FREE</button>';
+      else if (isOwned) btnHtml = '<button class="cos-buy-btn owned">Owned</button>';
+      else btnHtml = `<button class="cos-buy-btn" onclick="requestCosmeticPurchase('${id}','${safeName}',${price})">Request Purchase</button>`;
+      const priceTag = isFree
+        ? '<div class="cos-price free">FREE</div>'
+        : (price > 0 ? `<div class="cos-price">$${price.toFixed(2)}<small>USD</small></div>` : '');
+      return `
+        <div class="cosmetics-card">
+          ${isAnim ? '<span class="cos-anim-badge">ANIMATED</span>' : ''}
+          <img src="${imgSrc}" alt="${item.name || id}" class="cos-preview" onerror="this.outerHTML='<div class=&quot;cos-preview-none&quot;>NO PREVIEW</div>'">
+          <div class="cos-name">${item.name || id}</div>
+          <div class="cos-id">${id}</div>
+          <div class="cos-badge">${item.category || 'CAPE'}</div>
+          ${priceTag}
+          ${btnHtml}
+        </div>
+      `;
+    }).join('');
+  }
+
   function loadCosmeticsStore() {
-    db.ref('capes/catalog').once('value', async snap => {
-      const data = snap.val() || {};
-      const grid = document.getElementById('cosmetics-store-grid');
-      const entries = Object.entries(data);
-      if (!entries.length) {
-        grid.innerHTML = '<div class="ms-empty">No cosmetics available yet.</div>';
-        return;
-      }
-      const user = getCoinsUser();
-      const ownedIds = new Set();
-      if (user) {
-        const playerId = await resolvePlayerId(user.name, user.type);
-        if (playerId) {
-          try {
-            const invSnap = await db.ref(`capes/inventory/${playerId}`).once('value');
-            const inv = invSnap.val() || {};
-            (inv.ownedItemIds || []).forEach(id => ownedIds.add(id));
-          } catch (e) {}
-        }
-      }
-      grid.innerHTML = entries.map(([id, item]) => {
-        const imgSrc = item.icon || `Capes/${id}.png`;
-        const isAnim = item.animated;
-        const isFree = item.free === true;
-        const isOwned = ownedIds.has(id);
-        const safeName = (item.name || id).replace(/'/g, "\\'");
-        let btnHtml;
-        if (isFree) btnHtml = '<button class="cos-buy-btn owned">FREE</button>';
-        else if (isOwned) btnHtml = '<button class="cos-buy-btn owned">Owned</button>';
-        else btnHtml = `<button class="cos-buy-btn" onclick="requestCosmeticPurchase('${id}','${safeName}')">Request Purchase</button>`;
-        const priceTag = isFree ? '<div class="cos-price free">FREE</div>' : '';
-        return `
-          <div class="cosmetics-card">
-            ${isAnim ? '<span class="cos-anim-badge">ANIMATED</span>' : ''}
-            <img src="${imgSrc}" alt="${item.name || id}" class="cos-preview" onerror="this.style.display='none'">
-            <div class="cos-name">${item.name || id}</div>
-            <div class="cos-id">${id}</div>
-            <div class="cos-badge">${item.category || 'CAPE'}</div>
-            ${priceTag}
-            ${btnHtml}
-          </div>
-        `;
-      }).join('');
-    });
+    if (cosmeticsCatalogRef) { renderCosmeticsGrid(); return; }
+    cosmeticsCatalogRef = db.ref('capes/catalog');
+    cosmeticsCatalogCb = snap => {
+      cosmeticsCatalogData = snap.val() || {};
+      renderCosmeticsGrid();
+    };
+    cosmeticsCatalogRef.on('value', cosmeticsCatalogCb);
   }
 
   let activeChatTicketId = null;
   let activeChatUsername = null;
   let chatMsgsCallback = null;
+  let chatLockCallback = null;
+  let prevLockTicketId = null;
 
   window.cosShowOfflineForm = () => {
     document.getElementById('cos-offline-group').style.display = '';
@@ -2271,7 +2429,7 @@ footer{
     renderCosAccList();
   };
 
-  window.requestCosmeticPurchase = async (itemId, itemName) => {
+  window.requestCosmeticPurchase = async (itemId, itemName, priceUsd) => {
     const user = getCoinsUser();
     if (!user) { alert('Please log in with the account boxes above to request a purchase.'); return; }
     const username = user.name;
@@ -2282,6 +2440,8 @@ footer{
       const updates = {};
       updates[`cosmetics_orders/${orderId}`] = {
         id: orderId, itemId, itemName,
+        price: Number(priceUsd) || 0,
+        priceCurrency: 'USD',
         username,
         status: 'pending',
         createdAt: Date.now()
@@ -2311,6 +2471,10 @@ footer{
       db.ref(`messages/${prevChatTicketId}`).off('value', chatMsgsCallback);
       chatMsgsCallback = null;
     }
+    if (chatLockCallback && prevLockTicketId) {
+      db.ref(`job_applications/${prevLockTicketId}`).off('value', chatLockCallback);
+      chatLockCallback = null;
+    }
     prevChatTicketId = ticketId;
     activeChatTicketId = ticketId;
     activeChatUsername = username;
@@ -2319,6 +2483,14 @@ footer{
     document.getElementById('chat-modal').classList.add('open');
     const container = document.getElementById('chat-msgs');
     container.innerHTML = '<p style="opacity:.4;font-size:12px;text-align:center;">Connecting...</p>';
+    prevLockTicketId = ticketId;
+    chatLockCallback = db.ref(`job_applications/${ticketId}`).on('value', snap => {
+      const locked = !!(snap.val() && snap.val().locked);
+      document.getElementById('chat-lock-bar').style.display = locked ? 'flex' : 'none';
+      document.getElementById('chat-input').disabled = locked;
+      document.getElementById('chat-send').disabled = locked;
+      document.getElementById('chat-input').placeholder = locked ? 'This ticket is paused by staff' : 'Type a message or paste an image URL...';
+    });
     const msgsRef = db.ref(`messages/${ticketId}`);
     chatMsgsCallback = msgsRef.on('value', snapshot => {
       const msgs = snapshot.val() || {};
@@ -2350,6 +2522,11 @@ footer{
     const input = document.getElementById('chat-input');
     const text = input.value.trim();
     if (!text || !activeChatTicketId) return;
+    const lockSnap = await db.ref(`job_applications/${activeChatTicketId}`).once('value');
+    if (lockSnap.val() && lockSnap.val().locked) {
+      alert('This ticket has been paused by a staff member. Messages are disabled until it is resumed.');
+      return;
+    }
     input.value = '';
     const msgObj = {
       sender: 'USER', senderName: activeChatUsername,
@@ -2394,7 +2571,14 @@ footer{
       const data = snap.val() || {};
       const firebaseTickets = Object.entries(data)
         .filter(([id, t]) => t.name && t.name.toLowerCase().startsWith(username.toLowerCase()))
-        .map(([id, t]) => ({ ticketId: id, itemName: t.name.replace(/^.*\(Purchase:?\s*/, '').replace(/\)\s*$/, ''), timestamp: t.timestamp }));
+        .map(([id, t]) => {
+          const isApp = /\(Application:?\s*/.test(t.name || '');
+          const itemName = String(t.name || '')
+            .replace(/^.*\(Application:?\s*/, '')
+            .replace(/^.*\(Purchase:?\s*/, '')
+            .replace(/\)\s*$/, '');
+          return { ticketId: id, itemName, isApp, timestamp: t.timestamp, lastMessage: t.lastMessage };
+        });
 
       const merged = [];
       const seen = new Set();
@@ -2403,21 +2587,33 @@ footer{
       });
       merged.sort((a, b) => (b.createdAt || b.timestamp || 0) - (a.createdAt || a.timestamp || 0));
 
-      if (merged.length === 0) {
-        list.innerHTML = '<div class="cos-ticket-empty">No tickets found for this username.</div>';
-        return;
-      }
-      list.innerHTML = merged.map(t => {
-        const date = new Date(t.createdAt || t.timestamp || Date.now()).toLocaleDateString();
-        return `<div class="cos-ticket" onclick="openChat('${t.ticketId}','${username}')">
+      db.ref('job_applications').once('value', appSnap => {
+        const apps = appSnap.val() || {};
+        const statusById = {};
+        Object.entries(apps).forEach(([id, a]) => { statusById[id] = (a && a.status) || 'pending'; });
+
+        if (merged.length === 0) {
+          list.innerHTML = '<div class="cos-ticket-empty">No tickets found for this username.</div>';
+          return;
+        }
+        list.innerHTML = merged.map(t => {
+          const date = new Date(t.createdAt || t.timestamp || Date.now()).toLocaleDateString();
+          const status = t.isApp ? (statusById[t.ticketId] || 'pending') : null;
+          const statusColor = status === 'accepted' ? '#22c55e' : status === 'rejected' ? '#ef4444' : '#fbbf24';
+          const label = (t.itemName || 'Purchase') + (t.isApp ? ' Application' : '');
+          const statusBadge = status ? `
+            <span style="display:inline-block;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:${statusColor};border:1px solid ${statusColor};padding:3px 8px;">${status.toUpperCase()}</span>` : '';
+          return `<div class="cos-ticket" onclick="openChat('${t.ticketId}','${username}','${label.replace(/'/g, "\\'")}')">
           <div style="flex:1;min-width:0;">
-            <span class="cos-ticket-badge">${t.itemName || 'Purchase'}</span>
+            <span class="cos-ticket-badge">${label}</span>
+            ${statusBadge}
             <div class="cos-ticket-meta">${date}</div>
             <div class="cos-ticket-id">#${t.ticketId.substring(0,8)}</div>
           </div>
           <i class="fa-solid fa-comment cos-ticket-arrow"></i>
         </div>`;
-      }).join('');
+        }).join('');
+      });
     });
   };
 
@@ -2667,6 +2863,11 @@ footer{
       chatMsgsCallback = null;
       prevChatTicketId = null;
     }
+    if (activeChatTicketId && chatLockCallback) {
+      db.ref(`job_applications/${activeChatTicketId}`).off('value', chatLockCallback);
+      chatLockCallback = null;
+      prevLockTicketId = null;
+    }
   };
 
   // ---- Posts ----
@@ -2718,6 +2919,217 @@ footer{
       renderPosts();
     });
   }
+
+  // ---- Jobs ----
+  const jobRoles = {
+    admin: {
+      name: 'Admin', icon: 'fa-solid fa-crown',
+      desc: 'Oversee the whole Soul Client community and team. Handle serious disputes, ban appeals, and help shape the project\'s direction.',
+      questions: [
+        'Why do you want to become an Admin?',
+        'How many hours per week can you dedicate to Soul Client?',
+        'Do you have previous admin or leadership experience? Tell us about it.',
+        'A player is spamming hate speech in chat. How do you handle it?'
+      ]
+    },
+    moderator: {
+      name: 'Moderator', icon: 'fa-solid fa-gavel',
+      desc: 'Keep the community safe and friendly. Enforce the rules, mute/warn rule-breakers, and answer questions from players.',
+      questions: [
+        'Why do you want to become a Moderator?',
+        'How many hours per week can you dedicate to moderation?',
+        'What would you do if a friend breaks the rules in front of you?',
+        'A player is being toxic in chat. What\'s your first move?'
+      ]
+    },
+    staff: {
+      name: 'Staff', icon: 'fa-solid fa-users',
+      desc: 'General staff member. Help players in chat, support tickets, and the Discord server. The first line of help for the community.',
+      questions: [
+        'Why do you want to join the Staff team?',
+        'How many hours per week can you be available?',
+        'Do you have any prior staff experience (Discord, servers, communities)?',
+        'How would you help a player who is confused about how to install Soul Client?'
+      ]
+    },
+    manager: {
+      name: 'Manager', icon: 'fa-solid fa-briefcase',
+      desc: 'Lead a part of the team — moderators, staff, or events. Review reports, coordinate shifts, and report to the founders.',
+      questions: [
+        'Why do you want to become a Manager?',
+        'How many hours per week can you dedicate to management?',
+        'Do you have experience leading a team or community?',
+        'Two staff members are arguing in the staff channel. How do you resolve it?'
+      ]
+    }
+  };
+  let selectedJob = null;
+
+  function showJobsPage() {
+    document.querySelectorAll('section:not(.page-posts), .jagged, header.hero, footer, .countdown-banner, .support-fab').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.page-posts').forEach(p => p.classList.remove('active'));
+    document.getElementById('jobs-page').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    renderJobGrid();
+    jobBackToList();
+    loadMyJobApps();
+  }
+  window.showJobsPage = showJobsPage;
+
+  let myAppsListener = null;
+
+  function loadMyJobApps() {
+    const user = getCoinsUser();
+    const section = document.getElementById('job-my-apps');
+    const list = document.getElementById('job-my-apps-list');
+    if (!user || !section || !list) return;
+    section.style.display = user ? '' : 'none';
+    if (!user) return;
+    if (myAppsListener) return;
+    myAppsListener = db.ref('job_applications').on('value', snap => {
+      const apps = snap.val() || {};
+      const mine = Object.entries(apps)
+        .filter(([id, a]) => a && a.username && a.username.toLowerCase() === user.name.toLowerCase())
+        .map(([id, a]) => ({ id, ...a }))
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      if (mine.length === 0) {
+        list.innerHTML = '<div style="background:var(--paper-dim);border:2px dashed var(--ink);border-radius:14px;padding:26px;text-align:center;opacity:.6;font-size:13px;">You haven\'t applied for any role yet. Pick a job above and apply!</div>';
+        return;
+      }
+      list.innerHTML = mine.map(a => {
+        const role = jobRoles[a.role];
+        const c = a.status === 'accepted' ? '#22c55e' : a.status === 'rejected' ? '#ef4444' : '#fbbf24';
+        const date = new Date(a.createdAt || Date.now()).toLocaleDateString();
+        const chatLabel = `${(role ? role.name : (a.roleName || 'Application'))} Application Chat`;
+        const locked = !!a.locked;
+        return `<div class="job-my-app ${a.status || 'pending'}" style="${locked ? 'opacity:.9;' : ''}">
+          <div class="job-my-role">
+            <i class="${role ? role.icon : 'fa-solid fa-briefcase'}"></i>
+            <div style="min-width:0;">
+              <b>${role ? role.name : (a.roleName || 'Application')} ${locked ? '<i class="fa-solid fa-lock" style="color:#f59e0b;font-size:11px;margin-left:4px;" title="Chat paused"></i>' : ''}</b>
+              <span class="job-my-meta">${a.name || ''} &middot; <span style="font-family:monospace;">${a.minecraftIgn || ''}</span></span>
+              <span class="job-my-sub">${date} &middot; #${a.id.substring(0, 8)}</span>
+            </div>
+          </div>
+          <div class="job-my-right">
+            <span class="job-my-status" style="color:${c};border-color:${c};background:${c}14;"><span class="job-my-dot"></span>${(a.status || 'pending').toUpperCase()}</span>
+            <button class="job-my-chat ${locked ? 'locked' : ''}" onclick="openChat('${a.id}','${user.name}','${chatLabel.replace(/'/g, "\\'")}')">${locked ? '<i class="fa-solid fa-lock"></i> Paused' : '<i class="fa-solid fa-comment"></i> Chat'}</button>
+          </div>
+        </div>`;
+      }).join('');
+    });
+  }
+
+  function renderJobGrid() {
+    const grid = document.getElementById('jobs-grid');
+    grid.innerHTML = Object.entries(jobRoles).map(([id, job]) => `
+      <button class="job-card" onclick="selectJob('${id}')">
+        <span class="job-icon"><i class="${job.icon}"></i></span>
+        <span class="job-role">${job.name}</span>
+        <p class="job-desc">${job.desc}</p>
+        <span class="job-apply-btn">Apply Now <i class="fa-solid fa-arrow-right"></i></span>
+      </button>
+    `).join('');
+  }
+
+  window.selectJob = (role) => {
+    const job = jobRoles[role];
+    if (!job) return;
+    selectedJob = role;
+    document.getElementById('jobs-grid').style.display = 'none';
+    document.getElementById('job-form-wrap').style.display = '';
+    document.getElementById('job-form-icon').innerHTML = `<i class="${job.icon}"></i>`;
+    document.getElementById('job-form-title').textContent = `${job.name} Application`;
+    const user = getCoinsUser();
+    const accName = user ? user.name : '';
+    const fields = [
+      { type: 'text', label: 'Name', id: 'job-name', val: '', placeholder: 'Your real name', max: 60 },
+      { type: 'text', label: 'Username', id: 'job-username', val: accName, placeholder: 'Your Soul Client / Discord username', max: 32 },
+      { type: 'text', label: 'Minecraft IGN', id: 'job-ign', val: '', placeholder: 'Your Minecraft in-game name', max: 16 }
+    ];
+    job.questions.forEach((q, i) => fields.push({ type: 'textarea', label: q, id: 'job-q-' + i, val: '', placeholder: 'Type your answer...', max: 2000 }));
+    document.getElementById('job-questions').innerHTML = fields.map(f => `
+      <div class="job-form-field">
+        <label class="job-form-label" for="${f.id}">${f.label} <span class="req">*</span></label>
+        ${f.type === 'textarea'
+          ? `<textarea class="job-form-textarea" id="${f.id}" placeholder="${f.placeholder}" maxlength="${f.max}" autocomplete="off"></textarea>`
+          : `<input type="text" class="job-form-input" id="${f.id}" placeholder="${f.placeholder}" value="${f.val.replace(/"/g, '&quot;')}" maxlength="${f.max}" autocomplete="off">`}
+      </div>
+    `).join('');
+    document.getElementById('job-status').innerHTML = '';
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+
+  window.jobBackToList = () => {
+    document.getElementById('jobs-grid').style.display = '';
+    document.getElementById('job-form-wrap').style.display = 'none';
+    document.getElementById('job-status').innerHTML = '';
+  };
+
+  function isGibberish(text) {
+    const t = (text || '').trim();
+    if (t.length < 15) return true;
+    const compact = t.replace(/\s+/g, '');
+    const uniq = new Set(compact).size;
+    if (uniq <= 3) return true;
+    if (!/[aeiouAEIOU]/.test(t) && uniq <= 6) return true;
+    if ((compact.length - uniq) / compact.length > 0.6) return true;
+    return false;
+  }
+
+  window.submitJobApplication = async () => {
+    const job = jobRoles[selectedJob];
+    const statusEl = document.getElementById('job-status');
+    if (!job) { statusEl.innerHTML = '<span style="color:#ef4444;">Select a job first.</span>'; return; }
+    const name = document.getElementById('job-name').value.trim();
+    const username = document.getElementById('job-username').value.trim();
+    const ign = document.getElementById('job-ign').value.trim();
+    if (!name) { statusEl.innerHTML = '<span style="color:#ef4444;">Please enter your name.</span>'; return; }
+    if (!/^[a-zA-Z0-9_]{3,32}$/.test(username)) { statusEl.innerHTML = '<span style="color:#ef4444;">Username must be 3-32 characters (letters, numbers, underscores).</span>'; return; }
+    if (!/^[a-zA-Z0-9_]{3,16}$/.test(ign)) { statusEl.innerHTML = '<span style="color:#ef4444;">Minecraft IGN must be 3-16 characters (letters, numbers, underscores).</span>'; return; }
+    const answers = {};
+    let missing = null;
+    let lowEffort = null;
+    job.questions.forEach((q, i) => {
+      const el = document.getElementById('job-q-' + i);
+      const val = el ? el.value.trim() : '';
+      if (!val && !missing) missing = q;
+      if (val && isGibberish(val) && !lowEffort) lowEffort = q;
+      answers['q' + i] = val;
+    });
+    if (missing) { statusEl.innerHTML = `<span style="color:#ef4444;">Please answer: <b>${missing}</b></span>`; return; }
+    if (lowEffort) { statusEl.innerHTML = `<span style="color:#ef4444;">Your answer to <b>${lowEffort}</b> looks too short or low-effort. Write a real answer (at least a couple of sentences) so the team can review you properly.</span>`; return; }
+    try {
+      const appRef = db.ref('job_applications').push();
+      const appId = appRef.key;
+      const updates = {};
+      updates[`job_applications/${appId}`] = {
+        id: appId,
+        role: selectedJob, roleName: job.name,
+        name, username, minecraftIgn: ign,
+        answers, status: 'pending', unread: true, createdAt: Date.now()
+      };
+      updates[`support_tickets/${appId}`] = {
+        id: appId, name: `${username} (Application: ${job.name})`,
+        lastMessage: `Job application for ${job.name} by ${username}`,
+        timestamp: Date.now(), unread: true
+      };
+      updates[`messages/${appId}/init`] = {
+        sender: 'USER', senderName: username,
+        text: `Hi! I'd like to apply for ${job.name}. Name: ${name}, Username: ${username}, Minecraft IGN: ${ign}.`,
+        timestamp: Date.now()
+      };
+      await db.ref().update(updates);
+      try { saveTicketLocally(appId, username, job.name + ' Application'); } catch (e) {}
+      statusEl.innerHTML = `<span style="color:#22c55e;"><b>Application submitted!</b> Your application for <b>${job.name}</b> was received. We'll reach out here if you're shortlisted.</span>`;
+      openChat(appId, username, job.name + ' Application Chat');
+      setTimeout(() => jobBackToList(), 2500);
+    } catch (err) {
+      console.error('submitJobApplication failed:', err);
+      statusEl.innerHTML = '<span style="color:#ef4444;">Could not submit your application. Check the browser console for details.</span>';
+    }
+  };
+
   // ---- Modules Showcase ----
   function renderModuleShowcase(mods) {
     const grid = document.getElementById('ms-grid');
